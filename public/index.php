@@ -4,12 +4,18 @@ declare(strict_types=1);
 use App\Application\Handlers\HttpErrorHandler;
 use App\Application\Handlers\ShutdownHandler;
 use App\Application\ResponseEmitter\ResponseEmitter;
+use Symfony\Component\Dotenv\Dotenv;
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$container = require __DIR__ . '/../app/did-container.php';
+$dotenv = new Dotenv();
+$dotenv->loadEnv(__DIR__ . '/../.env');
+
+//$container = require __DIR__ . '/../app/did-container.php';
+$container = require __DIR__ . '/../app/symfony-container.php';
+
 // Instantiate the app
 AppFactory::setContainer($container);
 $app = AppFactory::create();
@@ -24,7 +30,8 @@ $routes = require __DIR__ . '/../app/routes.php';
 $routes($app);
 
 /** @var bool $displayErrorDetails */
-$displayErrorDetails = $container->get('settings')['displayErrorDetails'];
+//$displayErrorDetails = $container->get('settings')['displayErrorDetails'];
+$displayErrorDetails = $container->getParameter('app.env') == 'dev';
 
 // Create Request object from globals
 $serverRequestCreator = ServerRequestCreatorFactory::create();

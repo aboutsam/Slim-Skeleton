@@ -1,0 +1,49 @@
+parameters:
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  App\:
+    resource: '../src/*'
+
+  Monolog\Processor\UidProcessor:
+    class: \Monolog\Processor\UidProcessor
+    public: true
+
+  log_handler:
+    class: \Monolog\Handler\StreamHandler
+    public: true
+    arguments:
+      - '%logger.path%'
+      - '%logger.level%'
+
+  logger:
+    class: \Monolog\Logger
+    public: true
+    arguments: ['%logger.name%']
+    calls:
+      - [pushHandler, ['@log_handler']]
+      - [pushProcessor, ['@Monolog\Processor\UidProcessor']]
+
+  Psr\Log\LoggerInterface: '@logger'
+
+  App\Domain\User\UserRepository:
+    class: \App\Infrastructure\Persistence\User\InMemoryUserRepository
+    public: true
+
+  App\Application\Actions\User\ListUsersAction:
+    class: \App\Application\Actions\User\ListUsersAction
+    public: true
+    arguments:
+      - '@logger'
+      - '@App\Domain\User\UserRepository'
+
+  App\Application\Actions\User\ViewUserAction:
+    class: \App\Application\Actions\User\ViewUserAction
+    public: true
+    arguments:
+      - '@logger'
+      - '@App\Domain\User\UserRepository'

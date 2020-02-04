@@ -11,6 +11,7 @@ services:
         command: php -S 0.0.0.0:8080 -t public
         environment:
             docker: "true"
+            LOGGER_PATH: "php://stdout"
         ports:
             - 8080:8080
         volumes:
