@@ -28,8 +28,6 @@ services:
       - [pushHandler, ['@log_handler']]
       - [pushProcessor, ['@Monolog\Processor\UidProcessor']]
 
-  Psr\Log\LoggerInterface: '@logger'
-
   App\Domain\User\UserRepository:
     class: \App\Infrastructure\Persistence\User\InMemoryUserRepository
     public: true

@@ -2,7 +2,6 @@ parameters:
   app.env: '%env(string:APP_ENV)%'
   app.debug: '%env(bool:APP_DEBUG)%'
 
-  settings.displayErrorDetails: '%env(bool:APP_DEBUG)%'
   logger.name: '%env(string:LOGGER_NAME)%'
   logger.path: '%env(string:LOGGER_PATH)%'
   logger.level: '%env(string:LOGGER_LEVEL)%'
