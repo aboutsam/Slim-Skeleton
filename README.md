@@ -1,3 +1,10 @@
+# Slim Framework 4 and Symfony Dependency Injection Component
+
+Here I am demonstrating how easy is to use Symfony Dependency Injection Container with Slim Framework v4.
+
+For detailed explanations, please refer to the [How to](https://www.thingsconnected.io/slim-framework-4-and-symfony-dependency-injection-component/).
+
+
 # Slim Framework 4 Skeleton Application
 
 [![Coverage Status](https://coveralls.io/repos/github/slimphp/Slim-Skeleton/badge.svg?branch=master)](https://coveralls.io/github/slimphp/Slim-Skeleton?branch=master)
